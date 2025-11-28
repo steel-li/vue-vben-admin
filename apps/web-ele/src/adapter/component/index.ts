@@ -117,6 +117,18 @@ const ElUpload = defineAsyncComponent(() =>
     import('element-plus/es/components/upload/style/css'),
   ]).then(([res]) => res.ElUpload),
 );
+const ElCascader = defineAsyncComponent(() =>
+  Promise.all([
+    import('element-plus/es/components/cascader/index'),
+    import('element-plus/es/components/cascader/style/index'),
+  ]).then(([res]) => res.ElCascader),
+);
+const ElMention = defineAsyncComponent(() =>
+  Promise.all([
+    import('element-plus/es/components/mention/index'),
+    import('element-plus/es/components/mention/style/index'),
+  ]).then(([res]) => res.ElMention),
+);
 
 const withDefaultPlaceholder = <T extends Component>(
   component: T,
@@ -160,6 +172,7 @@ export type ComponentType =
   | 'CheckboxGroup'
   | 'DatePicker'
   | 'Divider'
+  | 'Cascader'
   | 'IconPicker'
   | 'Input'
   | 'InputNumber'
@@ -170,6 +183,7 @@ export type ComponentType =
   | 'TimePicker'
   | 'TreeSelect'
   | 'Upload'
+  | 'Mention'
   | BaseFormComponentType;
 
 async function initComponentAdapter() {
@@ -204,6 +218,8 @@ async function initComponentAdapter() {
         visibleEvent: 'onVisibleChange',
       },
     ),
+    Cascader: ElCascader,
+    Mention: ElMention,
     Checkbox: ElCheckbox,
     CheckboxGroup: (props, { attrs, slots }) => {
       let defaultSlot;

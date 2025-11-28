@@ -48,6 +48,41 @@ const [Form, formApi] = useVbenForm({
       label: 'ApiSelect',
     },
     {
+      // 组件需要在 #/adapter.ts内注册，并加上类型
+      component: 'Cascader',
+      // 对应组件的参数
+      componentProps: {
+        // 菜单接口转options格式
+        afterFetch: (data: { name: string; path: string }[]) => {
+          return data.map((item: any) => ({
+            label: item.name,
+            value: item.path,
+          }));
+        },
+        // 菜单接口
+        api: getAllMenusApi,
+        clearable: true,
+        collapseTags: true,
+        collapseTagsTooltip: true,
+        filterable: true,
+        showCheckbox: true,
+        showAllLevels: false,
+        props: {
+          multiple: true,
+          emitPath: false,
+        },
+      },
+      // 字段名
+      fieldName: 'field2',
+      // 界面显示的label
+      label: 'Cascader',
+    },
+    {
+      component: 'Mentions',
+      fieldName: 'field3',
+      label: '提及',
+    },
+    {
       component: 'ApiTreeSelect',
       // 对应组件的参数
       componentProps: {
